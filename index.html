@@ -6,11 +6,34 @@
     <title>Circles</title>
     <!-- Paper.js -->
     <script type="text/javascript" src="assets/js/lib/paper-full.js"></script>
-    <script type ="text/paperscript" canvas="canvas"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Custom Paper.js Script -->
+    <script type="text/paperscript" canvas="myCanvas">
+
+        function onKeyDown(event) {
+            // Make random point
+            var maxPoint = new Point(view.size.width, view.size.height);
+            var randomPoint = Point.random();
+            var point = randomPoint * maxPoint;
+
+            // Make circle
+            var myCircle = new Path.Circle(new Point(point), 50);
+
+            // Return number between 0 and 255
+            function randomRGB() {
+                return Math.floor(Math.random() * Math.floor(256));
+            }
+
+            // Random RGB value
+            var color = "rgb(" + randomRGB() + ", " + randomRGB() + ", " + randomRGB() + ")";
+            // Set color of circle to that value
+            myCircle.fillColor = color;
+        }
+
+    </script>
 </head>
 <body>
-    <canvas id="canvas" style="background-color: black;">
-
-    </canvas>
+    <canvas id="myCanvas" resize></canvas>
 </body>
 </html>
