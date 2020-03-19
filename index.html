@@ -11,6 +11,9 @@
     <!-- Custom Paper.js Script -->
     <script type="text/paperscript" canvas="myCanvas">
 
+        // Make array that holds all circles
+        var circlesArr = [];
+
         function onKeyDown(event) {
             // Make random point
             var maxPoint = new Point(view.size.width, view.size.height);
@@ -18,7 +21,7 @@
             var point = randomPoint * maxPoint;
 
             // Make circle
-            var myCircle = new Path.Circle(new Point(point), 50);
+            var myCircle = new Path.Circle(new Point(point), 100);
 
             // Return number between 0 and 255
             function randomRGB() {
@@ -29,6 +32,16 @@
             var color = "rgb(" + randomRGB() + ", " + randomRGB() + ", " + randomRGB() + ")";
             // Set color of circle to that value
             myCircle.fillColor = color;
+
+            circlesArr.push(myCircle);
+        }
+
+        // Animate all circles on the screen
+        function onFrame(event) {
+            for(var i = 0; i < circlesArr.length; i++) {
+                circlesArr[i].fillColor.hue += 1;
+                circlesArr[i].scale(0.9);
+            }
         }
 
     </script>
